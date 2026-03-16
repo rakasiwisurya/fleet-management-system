@@ -59,7 +59,6 @@ export const getVehicle = createAsyncThunk(
 
       const vehicle = response.data.data as TVehicle["data"];
       const included = response.data.included as TVehicle["included"];
-      // const { route, trip, stop } = mapIncluded(response.data.included);
       const includedMap = Object.fromEntries(
         included?.map((i) => [i.type, i]) ?? [],
       );
