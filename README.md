@@ -152,7 +152,7 @@ or
 
 ## Create .env File
 
-NEXT_PUBLIC_BASE_API_URL=https://api-v3.mbta.com
+    NEXT_PUBLIC_BASE_API_URL=https://api-v3.mbta.com
 
 ---
 
@@ -349,7 +349,7 @@ or
 
 ## Buat .env File
 
-NEXT_PUBLIC_BASE_API_URL=https://api-v3.mbta.com
+    NEXT_PUBLIC_BASE_API_URL=https://api-v3.mbta.com
 
 ---
 
