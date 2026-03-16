@@ -119,7 +119,7 @@ const listSlice = createSlice({
 
         state.trips = data.map((item: any) => ({
           value: item.id,
-          label: `${item.attributes.headsign} (${item.attributes.direction_id === 1 ? "Inbound" : "Outbound"}) - ${item.attributes.block_id}`,
+          label: `${item.id} - ${item.attributes.headsign} (${item.attributes.block_id}) - ${item.attributes.direction_id === 1 ? "Inbound" : "Outbound"}`,
         }));
 
         state.tripsSuccess = "Success";
