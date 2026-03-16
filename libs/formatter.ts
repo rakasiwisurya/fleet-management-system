@@ -73,6 +73,9 @@ export const formatVehicleOccupancy = (status: TOccupancyStatus) => {
       return { label: "Few Seats Available", color: "orange" };
 
     case "FULL":
+    case "NOT_ACCEPTING_PASSENGERS":
+    case "NO_DATA_AVAILABLE":
+    case "NOT_BOARDABLE":
       return { label: "Full", color: "red" };
 
     default:

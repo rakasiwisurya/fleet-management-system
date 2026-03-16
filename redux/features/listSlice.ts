@@ -37,7 +37,7 @@ export const getTrips = createAsyncThunk(
         method: "get",
         endpoint: `/trips`,
         params: {
-          sort: "block_id",
+          sort: "direction_id",
           "filter[route]": route_ids,
         },
       });
@@ -99,7 +99,7 @@ const listSlice = createSlice({
 
         state.routes = data.map((item: any) => ({
           value: item.id,
-          label: item.attributes.long_name,
+          label: `${item.attributes.short_name} - ${item.attributes.long_name}`,
         }));
 
         state.routesSuccess = "Success";
@@ -120,7 +120,7 @@ const listSlice = createSlice({
 
         state.trips = data.map((item: any) => ({
           value: item.id,
-          label: `(${item.attributes.block_id}) ${item.attributes.headsign}${item.attributes.name ? ` - ${item.attributes.name}` : ""} `,
+          label: `${item.attributes.headsign} (${item.attributes.direction_id === 1 ? "Inbound" : "Outbound"}) - ${item.attributes.block_id}`,
         }));
 
         state.tripsSuccess = "Success";

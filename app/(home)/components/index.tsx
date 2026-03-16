@@ -98,18 +98,29 @@ const ModalDetail = ({ id, isModalOpen, onCancel }: TUseModalDetail) => {
         {/* ROUTE INFO */}
         <Col xs={24} md={8}>
           <Card title="Route Information">
-            <Text strong>Route ID</Text>
-            <div>{vehicle.relationships.route.data.id}</div>
+            <Text strong>Route</Text>
+            <div>
+              {vehicle.relationships.route.data.id} -{" "}
+              {vehicle.relationships.route.data?.long_name ||
+                vehicle.relationships.route.data?.short_name}
+            </div>
 
             <Text strong className="mt-2 block">
-              Trip ID
+              Trip
             </Text>
-            <div>{vehicle.relationships.trip.data.id}</div>
+            <div>
+              {vehicle.relationships.trip.data.id} -{" "}
+              {vehicle.relationships.trip.data.headsign} (
+              {vehicle.relationships.trip.data.block_id})
+            </div>
 
             <Text strong className="mt-2 block">
-              Stop ID
+              Stop
             </Text>
-            <div>{vehicle.relationships.stop.data.id}</div>
+            <div>
+              {vehicle.relationships.stop.data.id} -{" "}
+              {vehicle.relationships.stop.data.name}
+            </div>
           </Card>
         </Col>
 
@@ -122,7 +133,15 @@ const ModalDetail = ({ id, isModalOpen, onCancel }: TUseModalDetail) => {
               data.carriages.map((c, i) => (
                 <div key={i} className="mb-2">
                   <Text>
-                    {c.label} - {c.occupancy_percentage}%
+                    {c.label} -{" "}
+                    <span
+                      style={{
+                        color: formatVehicleOccupancy(c.occupancy_status).color,
+                      }}
+                    >
+                      {c.occupancy_status?.replaceAll("_", " ")}
+                    </span>{" "}
+                    - {c.occupancy_percentage ?? "N/A"}%
                   </Text>
 
                   <div className="w-full bg-gray-200 rounded h-2 mt-1">

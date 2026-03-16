@@ -1,12 +1,18 @@
 import {
   DEFAULT_CURRENT_PAGE,
-  DEFAULT_LIMIT,
   DEFAULT_TOTAL_DATA,
 } from "@/assets/data/constants";
 import { requestApi } from "@/libs/requestApi";
 import { TResponseError } from "@/types/global";
 import { TAsyncThunkPayload } from "@/types/redux";
-import { TVehicle, TVehicles, TVehicleState } from "@/types/vehicle";
+import {
+  TRouteIncluded,
+  TStopIncluded,
+  TTripIncluded,
+  TVehicle,
+  TVehicles,
+  TVehicleState,
+} from "@/types/vehicle";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export const getVehicles = createAsyncThunk(
@@ -16,7 +22,11 @@ export const getVehicles = createAsyncThunk(
       const response = await requestApi({
         method: "get",
         endpoint: `/vehicles`,
-        params: payload,
+        params: {
+          ...payload,
+          "fields[vehicle]":
+            "label,current_status,latitude,longitude,updated_at",
+        },
       });
 
       return response.data as TVehicles;
@@ -38,10 +48,70 @@ export const getVehicle = createAsyncThunk(
       const response = await requestApi({
         method: "get",
         endpoint: `/vehicles/${id}`,
-        params,
+        params: {
+          ...params,
+          include: "route,trip,stop",
+          "fields[route]": "long_name,short_name",
+          "fields[trip]": "headsign,direction_id,block_id",
+          "fields[stop]": "name,latitude,longitude",
+        },
       });
 
-      return response.data as TVehicle;
+      const vehicle = response.data.data as TVehicle["data"];
+      const included = response.data.included as TVehicle["included"];
+      // const { route, trip, stop } = mapIncluded(response.data.included);
+      const includedMap = Object.fromEntries(
+        included?.map((i) => [i.type, i]) ?? [],
+      );
+
+      const { route, trip, stop } = includedMap as {
+        route?: TRouteIncluded;
+        trip?: TTripIncluded;
+        stop?: TStopIncluded;
+      };
+
+      const vehicleData: TVehicle["data"] = {
+        ...vehicle,
+        relationships: {
+          ...vehicle.relationships,
+
+          route: {
+            ...vehicle.relationships.route,
+            data: {
+              ...vehicle.relationships.route.data,
+              long_name: route?.attributes.long_name,
+              short_name: route?.attributes.short_name,
+            },
+          },
+
+          trip: {
+            ...vehicle.relationships.trip,
+            data: {
+              ...vehicle.relationships.trip.data,
+              headsign: trip?.attributes.headsign,
+              direction_id: trip?.attributes.direction_id,
+              block_id: trip?.attributes.block_id,
+            },
+          },
+
+          stop: {
+            ...vehicle.relationships.stop,
+            data: {
+              ...vehicle.relationships.stop.data,
+              name: stop?.attributes.name,
+              latitude: stop?.attributes.latitude,
+              longitude: stop?.attributes.longitude,
+            },
+          },
+        },
+      };
+
+      delete response.data.included;
+
+      return {
+        ...response.data,
+        data: vehicleData,
+      } as TVehicle;
     } catch (error: TResponseError | any) {
       console.error(error);
       return thunkAPI.rejectWithValue(
