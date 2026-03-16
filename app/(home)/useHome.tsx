@@ -11,12 +11,16 @@ import {
   resetTrips,
 } from "@/redux/features/listSlice";
 import { getVehicles, resetVehicles } from "@/redux/features/vehicleSlice";
-import { Form } from "antd";
+import { Form, Grid } from "antd";
 import { useCallback, useEffect, useState } from "react";
 
+const { useBreakpoint } = Grid;
 const { useForm, useWatch } = Form;
 
 const useHome = () => {
+  const screens = useBreakpoint();
+  const isMobile = !screens.md;
+
   const [form] = useForm();
 
   const routes = useWatch("routes", form);
@@ -108,6 +112,7 @@ const useHome = () => {
   }, [vehiclesSuccess, current_page, total_record]);
 
   return {
+    isMobile,
     form,
     dark,
     currentPage,

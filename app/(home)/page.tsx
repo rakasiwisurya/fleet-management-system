@@ -27,6 +27,7 @@ const { Title, Text } = Typography;
 
 export default function Home() {
   const {
+    isMobile,
     form,
     dark,
     currentPage,
@@ -191,7 +192,7 @@ export default function Home() {
           total={totalData}
           pageSize={limit}
           showTotal={(total, range) =>
-            `${range[0]}-${range[1]} of ${total} items`
+            !isMobile && `${range[0]}-${range[1]} of ${total} items`
           }
           onChange={(page) => {
             setIsGetData(true);
