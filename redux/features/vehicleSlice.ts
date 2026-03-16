@@ -178,13 +178,26 @@ const vehicleSlice = createSlice({
         state.isVehiclesLoading = false;
       })
       .addCase(getVehicles.fulfilled, (state, action) => {
-        const { data } = action.payload;
+        const { data, links } = action.payload;
+
+        const limit = Number(action.meta.arg["page[limit]"]);
+        const offset = Number(action.meta.arg["page[offset]"]);
+
+        const currentPage = offset / limit + 1;
+
+        let total = 0;
+
+        if (links?.last) {
+          const url = new URL(links.last);
+          const lastOffset = Number(url.searchParams.get("page[offset]") || 0);
+          total = lastOffset + limit;
+        }
 
         state.vehicles = {
-          ...state.vehicles,
-          current_page: state.vehicles.current_page,
-          has_next: !!action?.payload?.links?.next,
-          has_prev: !!action?.payload?.links?.prev,
+          current_page: currentPage,
+          total_record: total,
+          has_next: !!links?.next,
+          has_prev: !!links?.prev,
           records: data.map((item) => ({
             id: item.id,
             label: item.attributes.label,

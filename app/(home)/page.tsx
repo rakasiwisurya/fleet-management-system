@@ -190,6 +190,9 @@ export default function Home() {
           current={currentPage}
           total={totalData}
           pageSize={limit}
+          showTotal={(total, range) =>
+            `${range[0]}-${range[1]} of ${total} items`
+          }
           onChange={(page) => {
             setIsGetData(true);
             setCurrentPage(page);
@@ -200,8 +203,8 @@ export default function Home() {
             setLimit(size);
           }}
           pageSizeOptions={DEFAULT_PAGE_SIZE}
-          showSizeChanger={true}
-          responsive={true}
+          showSizeChanger
+          responsive
         />
       </main>
 
