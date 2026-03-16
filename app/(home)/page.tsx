@@ -78,6 +78,7 @@ export default function Home() {
               className="w-full"
               loading={isRoutesLoading}
               options={listRoutes}
+              optionFilterProp="label"
               virtual
               showSearch
               allowClear
@@ -89,8 +90,10 @@ export default function Home() {
               mode="multiple"
               placeholder="Select an trip"
               className="w-full"
+              optionFilterProp="label"
               loading={isTripsLoading}
               options={listTrips}
+              virtual
               showSearch
               allowClear
             />
