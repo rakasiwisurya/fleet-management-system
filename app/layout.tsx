@@ -13,32 +13,35 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://fms-mit.vercel.app"),
+  metadataBase: new URL("https://fms-mit.arcdigitalinnovation.my.id"),
 
   title: "Fleet Management System",
+
   description:
     "Fleet Management System that integrates with the MBTA V3 API to monitor vehicle locations, trip status, and operational data in updated time.",
 
   openGraph: {
+    type: "website",
+    url: "https://fms-mit.arcdigitalinnovation.my.id",
     title: "Fleet Management System",
     description:
-      "Monitor MBTA vehicles in real-time with route filtering and map tracking.",
-    siteName: "Fleet Management System",
+      "Fleet Management System that integrates with the MBTA V3 API to monitor vehicle locations, trip status, and operational data in updated time.",
     images: [
       {
-        url: "/images/bus-icon.png",
-        width: 630,
+        url: "https://metatags.io/images/meta-tags.png",
+        width: 1200,
         height: 630,
         alt: "Fleet Management System",
       },
     ],
-    locale: "en_US",
-    type: "website",
   },
 
   twitter: {
     card: "summary_large_image",
-    images: ["/images/bus-icon.png"],
+    title: "Fleet Management System",
+    description:
+      "Fleet Management System that integrates with the MBTA V3 API to monitor vehicle locations, trip status, and operational data in updated time.",
+    images: ["https://metatags.io/images/meta-tags.png"],
   },
 };
 
