@@ -99,6 +99,7 @@ with slices:
 
 These slices manage:
 
+- dark mode
 - vehicles
 - routes
 - trips
@@ -133,7 +134,7 @@ This wrapper standardizes:
 
 Clone the repository:
 
-    git clone <repository-url>
+    git clone https://github.com/rakasiwisurya/fleet-management-system.git
 
 Navigate to the project folder:
 
@@ -290,6 +291,7 @@ State global dikelola menggunakan slice:
 
 Yang mengatur:
 
+- dark mode
 - data kendaraan
 - route
 - trip
@@ -325,6 +327,26 @@ Fungsinya:
 
 ---
 
+## Installasi
+
+Clone github repository:
+
+    git clone https://github.com/rakasiwisurya/fleet-management-system.git
+
+Arahkan ke project folder:
+
+    cd fleet-management-system
+
+Install dependencies:
+
+    npm install
+
+or
+
+    yarn install
+
+---
+
 ## Buat .env File
 
 NEXT_PUBLIC_BASE_API_URL=https://api-v3.mbta.com
@@ -332,10 +354,6 @@ NEXT_PUBLIC_BASE_API_URL=https://api-v3.mbta.com
 ---
 
 ## Cara Menjalankan Aplikasi
-
-Install dependency:
-
-    npm install
 
 Jalankan server development:
 
