@@ -1,5 +1,4 @@
 import { requestApi } from "@/libs/requestApi";
-import { TResponseError } from "@/types/global";
 import { TListState } from "@/types/list";
 import { TAsyncThunkPayload } from "@/types/redux";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
@@ -18,7 +17,7 @@ export const getRoutes = createAsyncThunk(
       });
 
       return response.data;
-    } catch (error: TResponseError | any) {
+    } catch (error: any) {
       console.error(error);
       return thunkAPI.rejectWithValue(
         error?.error?.details[0] || error.message,
@@ -43,7 +42,7 @@ export const getTrips = createAsyncThunk(
       });
 
       return response.data;
-    } catch (error: TResponseError | any) {
+    } catch (error: any) {
       console.error(error);
       return thunkAPI.rejectWithValue(
         error?.error?.details[0] || error.message,

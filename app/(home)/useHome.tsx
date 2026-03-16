@@ -71,7 +71,7 @@ const useHome = () => {
     setIsFilterLoading(true);
     setCurrentPage(DEFAULT_CURRENT_PAGE);
     setIsGetData(true);
-  }, [DEFAULT_CURRENT_PAGE]);
+  }, []);
 
   useEffect(() => {
     if (routes?.length > 0) {

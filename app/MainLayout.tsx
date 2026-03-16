@@ -27,7 +27,7 @@ const ThemeProvider = ({ children }: PropsWithChildren) => {
     const systemDark = media.matches;
 
     dispatch(setDark(systemDark));
-  }, []);
+  }, [dispatch]);
 
   if (dark === null) return null;
 

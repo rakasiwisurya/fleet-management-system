@@ -9,12 +9,12 @@ export const formatCapitalize = (value: string | null) => {
   return words.join(" ");
 };
 
-export const formatNumber = (value?: any) => {
+export const formatNumber = (value?: string | number) => {
   if (value) return `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   return value;
 };
 
-export const parseNumber = (value?: any) => {
+export const parseNumber = (value?: string) => {
   if (value) return value.replace(/,/g, "") as unknown as number;
   return value;
 };

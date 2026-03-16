@@ -20,7 +20,7 @@ import { FaBus } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { LuClock } from "react-icons/lu";
 import { MdLocationPin, MdRefresh } from "react-icons/md";
-import ModalDetail from "./components";
+import ModalDetail from "./components/ModalDetail";
 import useHome from "./useHome";
 
 const { Title, Text } = Typography;

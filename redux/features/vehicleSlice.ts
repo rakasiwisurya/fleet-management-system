@@ -3,7 +3,6 @@ import {
   DEFAULT_TOTAL_DATA,
 } from "@/assets/data/constants";
 import { requestApi } from "@/libs/requestApi";
-import { TResponseError } from "@/types/global";
 import { TAsyncThunkPayload } from "@/types/redux";
 import {
   TRouteIncluded,
@@ -30,7 +29,7 @@ export const getVehicles = createAsyncThunk(
       });
 
       return response.data as TVehicles;
-    } catch (error: TResponseError | any) {
+    } catch (error: any) {
       console.error(error);
       return thunkAPI.rejectWithValue(
         error?.error?.details[0] || error.message,
@@ -111,7 +110,7 @@ export const getVehicle = createAsyncThunk(
         ...response.data,
         data: vehicleData,
       } as TVehicle;
-    } catch (error: TResponseError | any) {
+    } catch (error: any) {
       console.error(error);
       return thunkAPI.rejectWithValue(
         error?.error?.details[0] || error.message,

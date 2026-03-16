@@ -173,14 +173,6 @@ Run the production server:
 
 ---
 
-## Linting
-
-Run ESLint:
-
-    npm run lint
-
----
-
 ## API Used
 
 The application consumes the **MBTA V3 Public API**:
@@ -352,12 +344,6 @@ Build aplikasi:
 Jalankan server production:
 
     npm run start
-
----
-
-## Linting
-
-    npm run lint
 
 ---
 
