@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import MainLayout from "./MainLayout";
@@ -54,6 +55,7 @@ export default function RootLayout({
     <html lang="en" className={poppins.variable}>
       <body className={`${poppins.className}`}>
         <MainLayout>{children}</MainLayout>
+        <Analytics />
       </body>
     </html>
   );
