@@ -149,6 +149,12 @@ or
 
 ---
 
+## Create .env File
+
+NEXT_PUBLIC_BASE_API_URL=https://api-v3.mbta.com
+
+---
+
 ## Running the Application
 
 Start development server:
@@ -316,6 +322,12 @@ Fungsinya:
 - konfigurasi axios
 - pengaturan base URL
 - penanganan error
+
+---
+
+## Buat .env File
+
+NEXT_PUBLIC_BASE_API_URL=https://api-v3.mbta.com
 
 ---
 
