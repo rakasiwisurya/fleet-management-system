@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     siteName: "Fleet Management System",
     images: [
       {
-        url: "public/images/bus-icon.png",
+        url: "/images/bus-icon.png",
         width: 630,
         height: 630,
         alt: "Fleet Management System",
@@ -34,6 +34,11 @@ export const metadata: Metadata = {
     ],
     locale: "en_US",
     type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    images: ["/images/bus-icon.png"],
   },
 };
 
