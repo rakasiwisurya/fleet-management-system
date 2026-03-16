@@ -16,10 +16,10 @@ import {
   Tag,
   Typography,
 } from "antd";
-import Image from "next/image";
 import { FaBus } from "react-icons/fa";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 import { LuClock } from "react-icons/lu";
-import { MdLocationPin } from "react-icons/md";
+import { MdLocationPin, MdRefresh } from "react-icons/md";
 import ModalDetail from "./components";
 import useHome from "./useHome";
 
@@ -58,7 +58,7 @@ export default function Home() {
           <ThemeToggle />
         </div>
 
-        <Title className="text-5xl! font-semibold!">
+        <Title className="text-center font-semibold!">
           Fleet Management System
         </Title>
 
@@ -95,16 +95,29 @@ export default function Home() {
             />
           </Form.Item>
 
-          <Button
-            type="primary"
-            htmlType="submit"
-            disabled={isRoutesLoading || isTripsLoading}
-            loading={isFilterLoading}
-            block
-          >
-            Filter
-          </Button>
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              icon={<FaMagnifyingGlass />}
+              disabled={isRoutesLoading || isTripsLoading}
+              loading={isFilterLoading}
+              block
+            >
+              Filter
+            </Button>
+          </Form.Item>
         </Form>
+
+        <div className="max-w-6xl w-full">
+          <Button
+            icon={<MdRefresh />}
+            onClick={() => setIsGetData(true)}
+            loading={isVehiclesLoading}
+          >
+            Refresh
+          </Button>
+        </div>
 
         <Row gutter={[24, 24]} className="max-w-6xl w-full">
           {isVehiclesLoading &&
@@ -132,13 +145,15 @@ export default function Home() {
                     className="text-center shadow-md cursor-pointer hover:shadow-lg transition-shadow"
                     onClick={() => onModalDetail(vehicle.id)}
                     cover={
-                      <Image
-                        src={`${dark ? "/tj-logo-white.png" : "/tj-logo-blue.png"}`}
-                        alt={vehicle.label}
-                        height={160}
-                        width={160}
-                        className="h-40! object-contain! p-4"
-                      />
+                      <div className="h-40">
+                        <div className="h-full flex items-center justify-center">
+                          <FaBus
+                            size={70}
+                            className="opacity-60 inline-block"
+                            color={statusInfo.color}
+                          />
+                        </div>
+                      </div>
                     }
                   >
                     <Title
